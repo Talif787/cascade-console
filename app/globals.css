@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+/*
+  Cascade console design tokens.
+  Instrument-panel aesthetic: ink and graphite chrome, calm light content,
+  a single confident iris accent, a sparing live-signal cyan, and the
+  lakehouse medallion colors used semantically where those layers appear.
+*/
+@theme {
+  /* Neutrals */
+  --color-ink: #0e1116;
+  --color-graphite: #171b22;
+  --color-slate-line: #262c36;
+  --color-slate-soft: #323a46;
+  --color-paper: #fbfbfd;
+  --color-paper-panel: #ffffff;
+  --color-hairline: #e7e9ee;
+  --color-text: #14181f;
+  --color-text-muted: #5b6472;
+  --color-text-invert: #e8ebf1;
+  --color-text-invert-muted: #99a2b2;
+
+  /* Brand / interactive */
+  --color-iris: #5d5fef;
+  --color-iris-bright: #7c7df5;
+  --color-iris-soft: #ecebfe;
+  --color-signal: #22d3ee;
+
+  /* Status */
+  --color-ok: #2fbf71;
+  --color-warn: #e8b341;
+  --color-down: #f0616d;
+
+  /* Lakehouse medallion layers (subject-specific semantics) */
+  --color-bronze: #b4703a;
+  --color-silver: #9ba6b2;
+  --color-gold: #d9a441;
+
+  /* Fonts (wired via next/font in layout.tsx) */
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, monospace;
+
+  /* Radius */
+  --radius-panel: 10px;
+  --radius-control: 7px;
+}
+
+* {
+  border-color: var(--color-hairline);
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Eyebrow: small uppercase label that encodes a section or context name. */
+.eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+/* Tabular data reads in mono with lining figures. */
+.tnum {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/*
+  Signature: the live pulse. A heartbeat ring on elements tied to real-time
+  flow (backend readiness, running stream jobs). Quiet, single, subject-true.
+*/
+@keyframes cascade-pulse {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--pulse-color, var(--color-ok)) 55%, transparent);
+  }
+  70% {
+    box-shadow: 0 0 0 6px color-mix(in srgb, var(--pulse-color, var(--color-ok)) 0%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--pulse-color, var(--color-ok)) 0%, transparent);
+  }
+}
+
+.pulse-dot {
+  animation: cascade-pulse 2s ease-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse-dot {
+    animation: none;
+  }
+}
+
+::selection {
+  background-color: var(--color-iris-soft);
+  color: var(--color-iris);
+}
