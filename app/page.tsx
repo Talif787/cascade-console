@@ -17,6 +17,7 @@ const CONTEXT_BLURB: Record<string, string> = {
   ingestion: "Source connectors and change-data-capture status.",
   processing: "Stream jobs and their exactly-once processing state.",
   mcp: "The governed MCP tool catalog exposed to AI agents.",
+  showcase: "The design system and component library, in both themes.",
 };
 
 export default function OverviewPage() {
