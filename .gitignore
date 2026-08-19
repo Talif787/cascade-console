@@ -29,3 +29,6 @@ next-env.d.ts
 
 # generated API types (run npm run gen:api to regenerate)
 lib/api/schema.d.ts
+
+# storybook
+storybook-static
