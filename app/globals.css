@@ -1,110 +1,222 @@
 @import "tailwindcss";
 
+/* Dark mode is driven by a .dark class on <html> (managed by next-themes). */
+@custom-variant dark (&:is(.dark *));
+
 /*
-  Cascade console design tokens.
-  Instrument-panel aesthetic: ink and graphite chrome, calm light content,
-  a single confident iris accent, a sparing live-signal cyan, and the
-  lakehouse medallion colors used semantically where those layers appear.
+  Cascade console design system.
+  Instrument-panel aesthetic: calm surfaces, a single confident iris accent, a
+  sparing live-signal cyan, and the lakehouse medallion colors used semantically.
+  Semantic tokens are defined per theme in :root / .dark, then mapped to Tailwind
+  utilities via @theme inline so bg-background, text-foreground, border-border,
+  etc. respond to the active theme.
 */
-@theme {
-  /* Neutrals */
-  --color-ink: #0e1116;
-  --color-graphite: #171b22;
-  --color-slate-line: #262c36;
-  --color-slate-soft: #323a46;
-  --color-paper: #fbfbfd;
-  --color-paper-panel: #ffffff;
-  --color-hairline: #e7e9ee;
-  --color-text: #14181f;
-  --color-text-muted: #5b6472;
-  --color-text-invert: #e8ebf1;
-  --color-text-invert-muted: #99a2b2;
 
-  /* Brand / interactive */
-  --color-iris: #5d5fef;
-  --color-iris-bright: #7c7df5;
-  --color-iris-soft: #ecebfe;
-  --color-signal: #22d3ee;
+:root {
+  --background: #fbfbfd;
+  --foreground: #14181f;
 
-  /* Status */
-  --color-ok: #2fbf71;
-  --color-warn: #e8b341;
-  --color-down: #f0616d;
+  --card: #ffffff;
+  --card-foreground: #14181f;
 
-  /* Lakehouse medallion layers (subject-specific semantics) */
-  --color-bronze: #b4703a;
-  --color-silver: #9ba6b2;
-  --color-gold: #d9a441;
+  --popover: #ffffff;
+  --popover-foreground: #14181f;
 
-  /* Fonts (wired via next/font in layout.tsx) */
-  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --primary: #5d5fef;
+  --primary-foreground: #ffffff;
+
+  --secondary: #f1f2f6;
+  --secondary-foreground: #1b2029;
+
+  --muted: #f1f2f6;
+  --muted-foreground: #5b6472;
+
+  --accent: #ecebfe;
+  --accent-foreground: #4a4bd0;
+
+  --destructive: #e5484d;
+  --destructive-foreground: #ffffff;
+
+  --border: #e7e9ee;
+  --input: #e4e6ec;
+  --ring: #5d5fef;
+
+  --signal: #06b6d4;
+  --ok: #1f9d57;
+  --warn: #b7791f;
+  --down: #e5484d;
+  --bronze: #a8632f;
+  --silver: #7c8794;
+  --gold: #b8861f;
+
+  --sidebar: #0e1116;
+  --sidebar-foreground: #e8ebf1;
+  --sidebar-muted: #99a2b2;
+  --sidebar-border: #262c36;
+  --sidebar-accent: #171b22;
+  --sidebar-ring: #5d5fef;
+
+  --radius: 0.6rem;
+}
+
+.dark {
+  --background: #0b0e13;
+  --foreground: #e8ebf1;
+
+  --card: #12161d;
+  --card-foreground: #e8ebf1;
+
+  --popover: #12161d;
+  --popover-foreground: #e8ebf1;
+
+  --primary: #7c7df5;
+  --primary-foreground: #0b0e13;
+
+  --secondary: #1c222b;
+  --secondary-foreground: #e8ebf1;
+
+  --muted: #1c222b;
+  --muted-foreground: #8a93a3;
+
+  --accent: #23233a;
+  --accent-foreground: #c7c8fb;
+
+  --destructive: #f0616d;
+  --destructive-foreground: #0b0e13;
+
+  --border: #242b35;
+  --input: #2a323d;
+  --ring: #7c7df5;
+
+  --signal: #22d3ee;
+  --ok: #2fbf71;
+  --warn: #e8b341;
+  --down: #f0616d;
+  --bronze: #b4703a;
+  --silver: #9ba6b2;
+  --gold: #d9a441;
+
+  --sidebar: #090c11;
+  --sidebar-foreground: #e8ebf1;
+  --sidebar-muted: #8a93a3;
+  --sidebar-border: #1c222b;
+  --sidebar-accent: #161b22;
+  --sidebar-ring: #7c7df5;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-signal: var(--signal);
+  --color-ok: var(--ok);
+  --color-warn: var(--warn);
+  --color-down: var(--down);
+  --color-bronze: var(--bronze);
+  --color-silver: var(--silver);
+  --color-gold: var(--gold);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-muted: var(--sidebar-muted);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-ring: var(--sidebar-ring);
+
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, monospace;
 
-  /* Radius */
-  --radius-panel: 10px;
-  --radius-control: 7px;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+  --animate-overlay-in: overlay-in 0.15s ease-out;
+  --animate-content-in: content-in 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-pop-in: pop-in 0.14s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-* {
-  border-color: var(--color-hairline);
+@keyframes accordion-down {
+  from { height: 0; }
+  to { height: var(--radix-accordion-content-height); }
+}
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to { height: 0; }
+}
+@keyframes overlay-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes content-in {
+  from { opacity: 0; transform: translateY(6px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes pop-in {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
 }
 
-html {
-  color-scheme: light;
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
 }
 
-body {
-  background-color: var(--color-paper);
-  color: var(--color-text);
-  font-family: var(--font-sans);
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
-
-/* Eyebrow: small uppercase label that encodes a section or context name. */
 .eyebrow {
   font-family: var(--font-display);
   font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--color-text-muted);
+  color: var(--color-muted-foreground);
 }
 
-/* Tabular data reads in mono with lining figures. */
 .tnum {
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
 }
 
-/*
-  Signature: the live pulse. A heartbeat ring on elements tied to real-time
-  flow (backend readiness, running stream jobs). Quiet, single, subject-true.
-*/
 @keyframes cascade-pulse {
-  0% {
-    box-shadow: 0 0 0 0 color-mix(in srgb, var(--pulse-color, var(--color-ok)) 55%, transparent);
-  }
-  70% {
-    box-shadow: 0 0 0 6px color-mix(in srgb, var(--pulse-color, var(--color-ok)) 0%, transparent);
-  }
-  100% {
-    box-shadow: 0 0 0 0 color-mix(in srgb, var(--pulse-color, var(--color-ok)) 0%, transparent);
-  }
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--pulse-color, var(--color-ok)) 55%, transparent); }
+  70% { box-shadow: 0 0 0 6px color-mix(in srgb, var(--pulse-color, var(--color-ok)) 0%, transparent); }
+  100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--pulse-color, var(--color-ok)) 0%, transparent); }
 }
-
 .pulse-dot {
   animation: cascade-pulse 2s ease-out infinite;
 }
-
 @media (prefers-reduced-motion: reduce) {
-  .pulse-dot {
-    animation: none;
-  }
+  .pulse-dot { animation: none; }
 }
 
 ::selection {
-  background-color: var(--color-iris-soft);
-  color: var(--color-iris);
+  background-color: var(--color-accent);
+  color: var(--color-accent-foreground);
 }
