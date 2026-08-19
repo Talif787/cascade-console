@@ -137,19 +137,21 @@ export default function SloDetailPage() {
                     <Pause className="h-4 w-4" /> Suspend
                   </Button>
                 )}
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  disabled={retire.isPending}
-                  onClick={() =>
-                    retire.mutate(undefined, {
-                      onSuccess: () => toast.success("SLO retired"),
-                      onError: (e) => toast.error("Retire failed", { description: (e as ApiError)?.detail }),
-                    })
-                  }
-                >
-                  <Archive className="h-4 w-4" /> Retire
-                </Button>
+                {slo.status !== "retired" ? (
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    disabled={retire.isPending}
+                    onClick={() =>
+                      retire.mutate(undefined, {
+                        onSuccess: () => toast.success("SLO retired"),
+                        onError: (e) => toast.error("Retire failed", { description: (e as ApiError)?.detail }),
+                      })
+                    }
+                  >
+                    <Archive className="h-4 w-4" /> Retire
+                  </Button>
+                ) : null}
               </div>
             }
           />

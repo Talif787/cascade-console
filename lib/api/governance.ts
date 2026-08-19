@@ -106,8 +106,9 @@ function useSloAction(id: string, action: "evaluate" | "suspend" | "resume" | "r
   const qc = useQueryClient();
   return useMutation<Slo, import("@/lib/api/client").ApiError, void>({
     mutationFn: () => api.post<Slo>(`/api/v1/governance/slos/${id}/${action}`),
-    onSuccess: (updated) => {
+    onSuccess: async (updated) => {
       qc.setQueryData(governanceKeys.sloDetail(id), updated);
+      await qc.refetchQueries({ queryKey: governanceKeys.sloDetail(id), exact: true });
       qc.invalidateQueries({ queryKey: governanceKeys.slos });
     },
   });
@@ -123,8 +124,9 @@ export function useChangeTarget(id: string) {
   return useMutation<Slo, import("@/lib/api/client").ApiError, number>({
     mutationFn: (max_staleness_minutes: number) =>
       api.put<Slo>(`/api/v1/governance/slos/${id}/target`, { max_staleness_minutes }),
-    onSuccess: (updated) => {
+    onSuccess: async (updated) => {
       qc.setQueryData(governanceKeys.sloDetail(id), updated);
+      await qc.refetchQueries({ queryKey: governanceKeys.sloDetail(id), exact: true });
       qc.invalidateQueries({ queryKey: governanceKeys.slos });
     },
   });
