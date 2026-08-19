@@ -7,9 +7,16 @@
  * the generated paths and use openapi-fetch for full end-to-end typing.
  */
 
+export interface ValidationIssue {
+  loc: (string | number)[];
+  msg: string;
+  type: string;
+}
+
 export interface ApiError {
   status: number;
   detail: string;
+  issues?: ValidationIssue[];
 }
 
 const BASE = "/api/cascade";
@@ -21,13 +28,20 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   });
   if (!res.ok) {
     let detail = res.statusText;
+    let issues: ValidationIssue[] | undefined;
     try {
       const body = await res.json();
-      if (body && typeof body.detail === "string") detail = body.detail;
+      if (body && typeof body.detail === "string") {
+        detail = body.detail;
+      } else if (body && Array.isArray(body.detail)) {
+        // FastAPI validation errors: detail is an array of issues.
+        issues = body.detail as ValidationIssue[];
+        detail = issues.map((i) => i.msg).join("; ") || detail;
+      }
     } catch {
       // no JSON body
     }
-    throw { status: res.status, detail } satisfies ApiError;
+    throw { status: res.status, detail, issues } satisfies ApiError;
   }
   if (res.status === 204) return undefined as T;
   return (await res.json()) as T;
