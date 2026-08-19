@@ -1,7 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { Play, Plus, X, AlertTriangle } from "lucide-react";
+import { toast } from "sonner";
+import { Play, Plus, X, AlertTriangle, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -18,6 +19,7 @@ import { ResultsTable } from "@/components/common/results-table";
 import type { ApiError } from "@/lib/api/client";
 import {
   useRunQuery,
+  useSyncView,
   type Column,
   type FilterPayload,
   type MeasurePayload,
@@ -47,6 +49,10 @@ export function QueryBuilder({ view }: { view: ServingView }) {
   const [limit, setLimit] = React.useState<number>(100);
 
   const run = useRunQuery(view.id);
+
+  if (view.status !== "ready") {
+    return <NotQueryable view={view} />;
+  }
 
   function toggleDimension(name: string) {
     setDimensions((d) => (d.includes(name) ? d.filter((x) => x !== name) : [...d, name]));
@@ -294,5 +300,29 @@ export function QueryBuilder({ view }: { view: ServingView }) {
         ) : null}
       </div>
     </div>
+  );
+}
+
+function NotQueryable({ view }: { view: ServingView }) {
+  const sync = useSyncView(view.id);
+  return (
+    <EmptyState
+      title="This view is not queryable yet"
+      description={`Its status is "${view.status}". Sync it to materialize the view, then build and run analytics queries here.`}
+      icon={<RefreshCw className="h-6 w-6" />}
+      action={
+        <Button
+          onClick={() =>
+            sync.mutate(undefined, {
+              onSuccess: () => toast.success("Sync complete"),
+              onError: (e) => toast.error("Sync failed", { description: (e as ApiError)?.detail }),
+            })
+          }
+          disabled={sync.isPending}
+        >
+          <RefreshCw className="h-4 w-4" /> {sync.isPending ? "Syncing" : "Sync now"}
+        </Button>
+      }
+    />
   );
 }
