@@ -25,7 +25,7 @@ export const NAV_ITEMS: NavItem[] = [
   { key: "overview", label: "Overview", href: "/", icon: LayoutDashboard, ready: true },
   { key: "serving", label: "Serving views", href: "/serving", icon: Table2, ready: true },
   { key: "copilot", label: "Copilot", href: "/copilot", icon: Sparkles, ready: true },
-  { key: "governance", label: "Governance", href: "/governance", icon: ShieldCheck, ready: false, phase: "F4" },
+  { key: "governance", label: "Governance", href: "/governance", icon: ShieldCheck, ready: true },
   { key: "pipelines", label: "Pipelines", href: "/pipelines", icon: Workflow, ready: false, phase: "F5" },
   { key: "contracts", label: "Data contracts", href: "/contracts", icon: FileCheck2, ready: false, phase: "F5" },
   { key: "ingestion", label: "Ingestion", href: "/ingestion", icon: DownloadCloud, ready: false, phase: "F5" },
