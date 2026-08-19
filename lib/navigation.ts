@@ -23,8 +23,8 @@ export interface NavItem {
 
 export const NAV_ITEMS: NavItem[] = [
   { key: "overview", label: "Overview", href: "/", icon: LayoutDashboard, ready: true },
-  { key: "serving", label: "Serving views", href: "/serving", icon: Table2, ready: false, phase: "F3" },
-  { key: "copilot", label: "Copilot", href: "/copilot", icon: Sparkles, ready: false, phase: "F3" },
+  { key: "serving", label: "Serving views", href: "/serving", icon: Table2, ready: true },
+  { key: "copilot", label: "Copilot", href: "/copilot", icon: Sparkles, ready: true },
   { key: "governance", label: "Governance", href: "/governance", icon: ShieldCheck, ready: false, phase: "F4" },
   { key: "pipelines", label: "Pipelines", href: "/pipelines", icon: Workflow, ready: false, phase: "F5" },
   { key: "contracts", label: "Data contracts", href: "/contracts", icon: FileCheck2, ready: false, phase: "F5" },
