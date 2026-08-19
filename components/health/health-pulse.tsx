@@ -1,16 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import { api, type ApiError } from "@/lib/api/client";
 import type { ReadinessStatus } from "@/lib/api/types";
 
 type State = "ok" | "degraded" | "down" | "loading";
 
 const color: Record<State, string> = {
-  ok: "var(--color-ok)",
-  degraded: "var(--color-warn)",
-  down: "var(--color-down)",
-  loading: "var(--color-text-invert-muted)",
+  ok: "var(--ok)",
+  degraded: "var(--warn)",
+  down: "var(--down)",
+  loading: "var(--sidebar-muted)",
 };
 
 const label: Record<State, string> = {
@@ -48,12 +48,10 @@ export function HealthPulse() {
     <div className="flex items-center gap-2">
       <span
         className={state === "loading" ? "h-2 w-2 rounded-full" : "pulse-dot h-2 w-2 rounded-full"}
-        style={{ backgroundColor: color[state], ["--pulse-color" as string]: color[state] }}
+        style={{ backgroundColor: color[state], "--pulse-color": color[state] } as CSSProperties}
         aria-hidden
       />
-      <span className="text-[0.72rem] font-medium text-[var(--color-text-invert-muted)]">
-        {label[state]}
-      </span>
+      <span className="text-[0.72rem] font-medium text-sidebar-muted">{label[state]}</span>
     </div>
   );
 }

@@ -26,16 +26,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const environment = process.env.CASCADE_ENVIRONMENT ?? "local";
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}>
         <Providers>
           <div className="flex h-dvh w-full overflow-hidden">
             <Sidebar />
             <div className="flex min-w-0 flex-1 flex-col">
               <Topbar environment={environment} />
-              <main className="flex-1 overflow-y-auto bg-[var(--color-paper)] px-7 py-6">
-                {children}
-              </main>
+              <main className="flex-1 overflow-y-auto px-7 py-6">{children}</main>
             </div>
           </div>
         </Providers>
