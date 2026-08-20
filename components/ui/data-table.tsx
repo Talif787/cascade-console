@@ -67,8 +67,8 @@ export function DataTable<TData, TValue>({
         </div>
       ) : null}
 
-      <div className="rounded-xl border">
-        <Table>
+      <div className="overflow-x-auto rounded-xl border">
+        <Table className="min-w-[640px]">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id} className="hover:bg-transparent">
