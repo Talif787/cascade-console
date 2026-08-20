@@ -30,6 +30,6 @@ export const NAV_ITEMS: NavItem[] = [
   { key: "contracts", label: "Data contracts", href: "/contracts", icon: FileCheck2, ready: true },
   { key: "ingestion", label: "Ingestion", href: "/ingestion", icon: DownloadCloud, ready: true },
   { key: "processing", label: "Processing", href: "/processing", icon: Waypoints, ready: true },
-  { key: "mcp", label: "MCP tools", href: "/mcp", icon: Plug, ready: false, phase: "F6" },
+  { key: "mcp", label: "MCP tools", href: "/mcp", icon: Plug, ready: true },
   { key: "showcase", label: "Components", href: "/showcase", icon: Palette, ready: true },
 ];
