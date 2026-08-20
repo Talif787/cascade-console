@@ -23,7 +23,7 @@ export function LineageExplorer() {
   const datasets = useDatasets();
   const [assetId, setAssetId] = React.useState<string>("");
 
-  const items = datasets.data?.items ?? [];
+  const items = React.useMemo(() => datasets.data?.items ?? [], [datasets.data]);
 
   React.useEffect(() => {
     if (!assetId && items.length > 0) setAssetId(items[0].id);
