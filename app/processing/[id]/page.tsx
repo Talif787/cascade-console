@@ -25,8 +25,8 @@ import {
 function Meta({ label, value }: { label: string; value: React.ReactNode }) {
   return (
     <div className="flex items-baseline justify-between gap-4 py-2">
-      <span className="text-[0.8rem] text-muted-foreground">{label}</span>
-      <span className="tnum text-right text-[0.82rem]">{value}</span>
+      <span className="shrink-0 text-[0.8rem] text-muted-foreground">{label}</span>
+      <span className="tnum min-w-0 break-all text-right text-[0.82rem]">{value}</span>
     </div>
   );
 }
