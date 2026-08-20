@@ -28,8 +28,8 @@ export const NAV_ITEMS: NavItem[] = [
   { key: "governance", label: "Governance", href: "/governance", icon: ShieldCheck, ready: true },
   { key: "pipelines", label: "Pipelines", href: "/pipelines", icon: Workflow, ready: true },
   { key: "contracts", label: "Data contracts", href: "/contracts", icon: FileCheck2, ready: true },
-  { key: "ingestion", label: "Ingestion", href: "/ingestion", icon: DownloadCloud, ready: false, phase: "F5" },
-  { key: "processing", label: "Processing", href: "/processing", icon: Waypoints, ready: false, phase: "F5" },
+  { key: "ingestion", label: "Ingestion", href: "/ingestion", icon: DownloadCloud, ready: true },
+  { key: "processing", label: "Processing", href: "/processing", icon: Waypoints, ready: true },
   { key: "mcp", label: "MCP tools", href: "/mcp", icon: Plug, ready: false, phase: "F6" },
   { key: "showcase", label: "Components", href: "/showcase", icon: Palette, ready: true },
 ];
